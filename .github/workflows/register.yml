@@ -54,6 +54,3 @@ jobs:
           else
             gh issue edit ${{ github.event.issue.number }} --add-label "failed"
           fi
-
-          # Close the issue with the comment and reason
-          gh issue close ${{ github.event.issue.number }} --comment "$comment" --reason "$reason"
