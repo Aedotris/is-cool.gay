@@ -39,6 +39,12 @@ jobs:
           # Ensure 'domain register' label exists
           gh label list | grep -q 'domain register' || gh label create 'domain register' --color FFD700
 
+          # Ensure 'success' label exists
+          gh label list | grep -q 'success' || gh label create 'success' --color 28a745
+
+          # Ensure 'failed' label exists
+          gh label list | grep -q 'failed' || gh label create 'failed' --color d73a4a
+
           # Update the issue with the new title and label
           gh issue edit ${{ github.event.issue.number }} -t "🌈 Register $domain" --add-label "domain register"
           
