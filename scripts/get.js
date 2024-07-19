@@ -11,8 +11,8 @@ if (
     array[1][0] == "Subdomain Name" &&
     !array[1][1].includes(" ") &&
     !nonascii.test(array[1][1]) &&
-    array[1][1] != ".is-probably.gay" &&
-    array[1][1].endsWith(".is-probably.gay")
+    array[1][1] != ".is-cool.gay" &&
+    array[1][1].endsWith(".is-cool.gay")
   )
 )
   return console.log(
@@ -40,7 +40,7 @@ if (type == "invalid") {
 }
 cf.dns.records
   .list({
-    zone_id: "2bf779292ec80723b8b7a94bb651ea7d",
+    zone_id: "66b0d2af52cc381a6a0b04fcd4b9c83d",
     name: array[1][1],
     per_page: 5000000,
   })
