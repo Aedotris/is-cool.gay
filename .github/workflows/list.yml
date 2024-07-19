@@ -39,6 +39,3 @@ jobs:
 
           # Update the issue with the new title and label
           gh issue edit ${{ github.event.issue.number }} -t "🌈 List $EVENT_USER_LOGIN" --add-label "domain list"
-          
-          # Close the issue with the comment and reason
-          gh issue close ${{ github.event.issue.number }} --comment "${comment//"\\n"/$'\n'}" --reason "$reason"
