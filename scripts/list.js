@@ -4,7 +4,7 @@ var cf = new flare({
 })
 cf.dns.records
   .list({
-    zone_id: "2bf779292ec80723b8b7a94bb651ea7d",
+    zone_id: "66b0d2af52cc381a6a0b04fcd4b9c83d",
     comment: { exact: process.env.EVENT_USER_LOGIN },
     per_page: 5000000
   })
