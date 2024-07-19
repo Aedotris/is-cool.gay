@@ -10,6 +10,6 @@ body:
     attributes:
       label: Subdomain Name
       description: What subdomain do you want to get info on? ex. something.is-probably.gay
-      value: ".is-probably.gay"
+      value: ".is-cool.gay"
     validations:
       required: true
