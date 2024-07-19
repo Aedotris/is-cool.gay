@@ -20,7 +20,7 @@ jobs:
         EVENT_ISSUE_BODY: ${{ github.event.issue.body }}
         EVENT_USER_LOGIN: ${{ github.event.issue.user.login }}
         CF_TOKEN: ${{ secrets.CF_TOKEN }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
       run: |
             npm i cloudflare@3.2.0
             node --no-deprecation scripts/list > data.csv
