@@ -103,3 +103,6 @@ This repository is for registering subdomains on is-cool.gay!
 4. ⏳ Within a few minutes, information about the domain will be listed.
 
 * * *
+<p align="center">
+  <strong>🌟 FROM VIETNAM WITH LOVE 🌟</strong>
+</p>
