@@ -31,8 +31,8 @@ jobs:
             gh issue edit https://github.com/is-probably-gay/is-probably-gay/issues/${{ github.event.issue.number }} -t "🌈 Edit $domain" --add-label "domain edit"
             if [ "$reason" = "completed" ]
               then
-                gh issue edit https://github.com/is-probably-gay/is-probably-gay/issues/${{ github.event.issue.number }} --add-label "success"
+                gh issue edit https://github.com/Aedotris/is-cool.gay/issues/${{ github.event.issue.number }} --add-label "success"
               else
-                gh issue edit https://github.com/is-probably-gay/is-probably-gay/issues/${{ github.event.issue.number }} --add-label "failed"
+                gh issue edit https://github.com/Aedotris/is-cool.gay/issues/${{ github.event.issue.number }} --add-label "failed"
             fi
-            gh issue close https://github.com/is-probably-gay/is-probably-gay/issues/${{ github.event.issue.number }} --comment "$comment" --reason "$reason"
+            gh issue close https://github.com/Aedotris/is-cool.gay/issues/${{ github.event.issue.number }} --comment "$comment" --reason "$reason"
