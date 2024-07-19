@@ -9,7 +9,7 @@ This repository is for registering subdomains on is-cool.gay!
 
 ## 📚 Read in Your Preferred Language
 
-- **For Vietnamese:** [Nhấn vào đây](#readme-tieng-viet)
+- **For Vietnamese:** [Nhấn vào đây](#readme-tiếng-việt)
 - **For English:** [Click here](#readme-in-english)
 
 * * *
