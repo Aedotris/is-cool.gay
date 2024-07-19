@@ -26,6 +26,6 @@ body:
     id: confirm
     attributes:
       label: Type your domain name + DELETE to confirm
-      description: ex. something.is-probably.gay DELETE
+      description: ex. something.is-cool.gay DELETE
     validations:
       required: true
