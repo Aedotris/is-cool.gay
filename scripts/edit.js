@@ -23,8 +23,8 @@ if (
     !array[2][1].includes(" ") &&
     !nonascii.test(array[1][1]) &&
     !nonascii.test(array[2][1]) &&
-    array[1][1] != ".is-probably.gay" &&
-    array[1][1].endsWith(".is-probably.gay")
+    array[1][1] != ".is-cool.gay" &&
+    array[1][1].endsWith(".is-cool.gay")
   )
 ) {
   return console.log(
@@ -44,7 +44,7 @@ const hostname =
   /^\s*((?=.{1,255}$)[0-9A-Za-z](?:(?:[0-9A-Za-z]|\b-){0,61}[0-9A-Za-z])?(?:\.[0-9A-Za-z](?:(?:[0-9A-Za-z]|\b-){0,61}[0-9A-Za-z])?)*\.?)\s*$/gm
 cf.dns.records
   .list({
-    zone_id: "2bf779292ec80723b8b7a94bb651ea7d",
+    zone_id: "66b0d2af52cc381a6a0b04fcd4b9c83d",
     name: array[1][1],
     comment: { exact: process.env.EVENT_USER_LOGIN },
     per_page: 5000000,
@@ -71,7 +71,7 @@ cf.dns.records
       cf.dns.records
         .edit(
           availabilityFilter[0].id,
-          { zone_id: "2bf779292ec80723b8b7a94bb651ea7d" },
+          { zone_id: "66b0d2af52cc381a6a0b04fcd4b9c83d" },
           {
             content: array[2][1],
             name: array[1][1],
