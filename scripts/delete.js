@@ -24,8 +24,8 @@ if (
     array[3][2] == undefined &&
     !array[1][1].includes(" ") &&
     !nonascii.test(array[1][1]) &&
-    array[1][1] != ".is-probably.gay" &&
-    array[1][1].endsWith(".is-probably.gay")
+    array[1][1] != ".is-cool.gay" &&
+    array[1][1].endsWith(".is-cool.gay")
   )
 ) {
   return console.log(
@@ -39,7 +39,7 @@ var cf = new flare({
 })
 cf.dns.records
   .list({
-    zone_id: "2bf779292ec80723b8b7a94bb651ea7d",
+    zone_id: "66b0d2af52cc381a6a0b04fcd4b9c83d",
     name: array[1][1],
     comment: { exact: process.env.EVENT_USER_LOGIN },
     per_page: 5000000,
@@ -54,7 +54,7 @@ cf.dns.records
     if (availabilityFilter[0]) {
       cf.dns.records
         .delete(availabilityFilter[0].id, {
-          zone_id: "2bf779292ec80723b8b7a94bb651ea7d",
+          zone_id: "66b0d2af52cc381a6a0b04fcd4b9c83d",
         })
         .then((response) => {
           return console.log(
