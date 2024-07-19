@@ -11,22 +11,34 @@ jobs:
     permissions:
       issues: write
     steps:
-
-    - name: Checkout
-      uses: actions/checkout@v2.3.1
+      - name: Checkout
+        uses: actions/checkout@v2.3.1
       
-    - name: List Subdomain
-      env:
-        EVENT_ISSUE_BODY: ${{ github.event.issue.body }}
-        EVENT_USER_LOGIN: ${{ github.event.issue.user.login }}
-        CF_TOKEN: ${{ secrets.CF_TOKEN }}
-        GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
-      run: |
-            npm i cloudflare@3.2.0
-            node --no-deprecation scripts/list > data.csv
-            cat data.csv
-            comment=$(cut -d "|" -f 2 data.csv)
-            reason=$(cut -d "|" -f 1 data.csv)
-            gh issue edit https://github.com/Aedotris/is-cool.gay/issues/${{ github.event.issue.number }} -t "🌈 List $EVENT_USER_LOGIN" --add-label "domain list"
-            gh issue close https://github.comAedotris/is-cool.gay/issues/${{ github.event.issue.number }} --comment "${comment//"\\n"/$'\n'}" --reason "$reason"
+      - name: Install Dependencies
+        run: npm i cloudflare@3.2.0
 
+      - name: List Subdomain
+        env:
+          EVENT_ISSUE_BODY: ${{ github.event.issue.body }}
+          EVENT_USER_LOGIN: ${{ github.event.issue.user.login }}
+          CF_TOKEN: ${{ secrets.CF_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+        run: |
+          node --no-deprecation scripts/list > data.csv
+          echo "Contents of data.csv:"
+          cat data.csv
+
+          comment=$(cut -d "|" -f 2 data.csv)
+          reason=$(cut -d "|" -f 1 data.csv)
+          
+          echo "Comment: $comment"
+          echo "Reason: $reason"
+
+          # Ensure 'domain list' label exists
+          gh label list | grep -q 'domain list' || gh label create 'domain list' --color 007bff
+
+          # Update the issue with the new title and label
+          gh issue edit ${{ github.event.issue.number }} -t "🌈 List $EVENT_USER_LOGIN" --add-label "domain list"
+          
+          # Close the issue with the comment and reason
+          gh issue close ${{ github.event.issue.number }} --comment "${comment//"\\n"/$'\n'}" --reason "$reason"
