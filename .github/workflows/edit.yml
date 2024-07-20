@@ -10,6 +10,7 @@ jobs:
     if: github.event.issue.title == 'Edit'
     permissions:
       issues: write
+      labels: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -24,10 +25,12 @@ jobs:
           CF_TOKEN: ${{ secrets.CF_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
         run: |
-          node --no-deprecation scripts/edit > data.csv
+          set -o pipefail
+          node --no-deprecation scripts/edit > data.csv || { echo "Error running node script"; exit 1; }
           echo "Contents of data.csv:"
           cat data.csv
 
+          # Extract fields from data.csv
           comment=$(cut -d "|" -f 2 data.csv)
           reason=$(cut -d "|" -f 1 data.csv)
           domain=$(cut -d "|" -f 3 data.csv)
@@ -74,3 +77,15 @@ jobs:
           $formatted_comment
           
           Thank you @${{ github.event.issue.user.login }} for the request! 🌟"
+
+      - name: Handle Errors
+        if: failure()
+        run: |
+          # Log the error and notify
+          echo "An error occurred during the script execution. See details below:" >> error.log
+          cat error.log
+          gh issue comment ${{ github.event.issue.number }} --body "### ❌ Error Occurred
+          An error occurred while processing the domain edit request. Please check the workflow logs for details.
+          ```bash
+          $(cat error.log)
+          ```"
