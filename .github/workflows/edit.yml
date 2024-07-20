@@ -10,7 +10,7 @@ jobs:
     if: github.event.issue.title == 'Edit'
     permissions:
       issues: write
-      labels: write
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v3
