@@ -38,4 +38,15 @@ jobs:
           gh label list | grep -q 'domain list' || gh label create 'domain list' --color 007bff
 
           # Update the issue with the new title and label
-          gh issue edit ${{ github.event.issue.number }} -t "🌈 List $EVENT_USER_LOGIN" --add-label "domain list"
+          gh issue edit ${{ github.event.issue.number }} -t "🌈 List ${{ github.event.issue.user.login }}" --add-label "domain list"
+
+          # Format the comment for better readability
+          formatted_comment=$(echo "$comment" | sed 's/\\n/\\n\\n/g')
+          
+          # Reply to the issue with the extracted information in a visually appealing format
+          gh issue comment ${{ github.event.issue.number }} --body "### 📄 Domain List Information
+          **Reason:** $reason
+          **Comment:**
+          $formatted_comment
+          
+          Thank you @${{ github.event.issue.user.login }} for the request! 🌟"
