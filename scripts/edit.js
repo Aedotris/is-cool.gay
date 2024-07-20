@@ -6,6 +6,8 @@ array.forEach((item, index) => {
 const original = array[3][1];
 array[3][1] = original.split("\n")[0];
 array[3].push(original.split("\n")[1]);
+
+// Kiểm tra định dạng đầu vào
 if (
   !(
     array.length == 4 &&
@@ -33,8 +35,8 @@ if (
   );
 }
 
-var flare = require("cloudflare");
-var cf = new flare({
+const flare = require("cloudflare");
+const cf = new flare({
   apiToken: process.env.CF_TOKEN,
 });
 
@@ -60,15 +62,14 @@ cf.dns.records
       );
     });
     if (availabilityFilter[0]) {
-      var type = "invalid";
+      let type = "invalid";
       if (hostname.test(array[2][1])) type = "CNAME";
       if (ipv4.test(array[2][1])) type = "A";
       if (ipv6.test(array[2][1])) type = "AAAA";
-      if (type == "hostname" && !array[1][1].includes(".")) type = "invalid";
-      if (type == "invalid") {
+      if (type === "invalid") {
         return console.log(
           "not planned|The record destination you entered is invalid!|" +
-            array[1][1]
+            array[2][1]
         );
       }
       cf.dns.records
