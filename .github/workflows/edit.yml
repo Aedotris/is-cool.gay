@@ -39,14 +39,28 @@ jobs:
           # Ensure 'domain edit' label exists
           gh label list | grep -q 'domain edit' || gh label create 'domain edit' --color f39c12
 
+          # Get current labels on the issue
+          current_labels=$(gh issue view ${{ github.event.issue.number }} --json labels -q '.labels[].name')
+
+          # Function to add label if it does not exist
+          add_label_if_not_exists() {
+            label=$1
+            if echo "$current_labels" | grep -q "$label"; then
+              echo "Label '$label' already exists on the issue."
+            else
+              gh issue edit ${{ github.event.issue.number }} --add-label "$label"
+              echo "Label '$label' added to the issue."
+            fi
+          }
+
           # Update the issue with the new title and label
           gh issue edit ${{ github.event.issue.number }} -t "🌈 Edit $domain" --add-label "domain edit"
           
           # Add success or failure label based on the registration result
           if [ "$reason" = "completed" ]; then
-            gh issue edit ${{ github.event.issue.number }} --add-label "success"
+            add_label_if_not_exists "success"
           else
-            gh issue edit ${{ github.event.issue.number }} --add-label "failed"
+            add_label_if_not_exists "failed"
           fi
 
           # Format the comment for better readability
