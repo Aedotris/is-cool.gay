@@ -87,9 +87,8 @@ cf.dns.records
             zone_id: "66b0d2af52cc381a6a0b04fcd4b9c83d",
             content: array[2][1],
             name: array[1][1],
-            proxied: false,
+            proxied: true,
             type,
-            ttl: 60,
             comment: process.env.EVENT_USER_LOGIN,
           }
         )
