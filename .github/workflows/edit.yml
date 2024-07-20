@@ -12,10 +12,10 @@ jobs:
       issues: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.1
+        uses: actions/checkout@v3
       
       - name: Install Dependencies
-        run: npm i cloudflare@3.2.0
+        run: npm install cloudflare@3.2.0
 
       - name: Edit Subdomain
         env:
@@ -31,7 +31,7 @@ jobs:
           comment=$(cut -d "|" -f 2 data.csv)
           reason=$(cut -d "|" -f 1 data.csv)
           domain=$(cut -d "|" -f 3 data.csv)
-          
+
           echo "Comment: $comment"
           echo "Reason: $reason"
           echo "Domain: $domain"
@@ -48,3 +48,15 @@ jobs:
           else
             gh issue edit ${{ github.event.issue.number }} --add-label "failed"
           fi
+
+          # Format the comment for better readability
+          formatted_comment=$(echo "$comment" | sed 's/\\n/\\n\\n/g')
+
+          # Reply to the issue with the extracted information in a visually appealing format
+          gh issue comment ${{ github.event.issue.number }} --body "### ✨ Domain Edit Information
+          **Domain:** [$domain](http://$domain)
+          **Reason:** $reason
+          **Comment:**
+          $formatted_comment
+          
+          Thank you @${{ github.event.issue.user.login }} for the request! 🌟"
