@@ -48,15 +48,3 @@ jobs:
           else
             gh issue edit ${{ github.event.issue.number }} --add-label "failed"
           fi
-
-          # Format the comment for better readability
-          formatted_comment=$(echo "$comment" | sed 's/\\n/\\n\\n/g')
-
-          # Reply to the issue with the extracted information in a visually appealing format
-          gh issue comment ${{ github.event.issue.number }} --body "### ✨ Domain Edit Information
-          **Domain:** [$domain](http://$domain)
-          **Reason:** $reason
-          **Comment:**
-          $formatted_comment
-          
-          Thank you @${{ github.event.issue.user.login }} for the request! 🌟"
